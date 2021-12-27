@@ -138,7 +138,7 @@ module.exports = {
                 });
             }
           
-            // const result = compare(body.password, results.password);
+           // const result = compare(body.password, results.password);
             
             
                 if (results)

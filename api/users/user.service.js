@@ -38,7 +38,7 @@ module.exports = {
     },
     getUserByUserEmail: (name, callBack) => {
         connection.query(
-          `select * from users where name = ?`,
+          `select * from users where full_name = ?`,
           [name],
           (error, results, fields) => {
             if (error) {
