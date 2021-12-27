@@ -8,7 +8,7 @@ module.exports = {
       connection.query(createUser,
         [
           Math.random()*9999999,
-          data.name,
+          data.full_name,
           data.email,
           data.phone,
           data.password,
@@ -36,10 +36,10 @@ module.exports = {
         }
       );
     },
-    getUserByUserEmail: (name, callBack) => {
+    getUserByUserEmail: (full_name, callBack) => {
         connection.query(
           `select * from users where full_name = ?`,
-          [name],
+          [full_name],
           (error, results, fields) => {
             if (error) {
               callBack(error);
@@ -65,7 +65,7 @@ module.exports = {
           `update users set full_name=?,aadhar_card=?,phone=?,password=? where user_id=?`,
           [
             data.id,
-            data.name,
+            data.full_name,
             data.aadhar_card,
             data.number,
             data.password

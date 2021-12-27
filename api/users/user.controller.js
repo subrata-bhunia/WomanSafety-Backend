@@ -87,8 +87,8 @@ module.exports = {
     },
     updateUsers: (req, res) => {
         const body = req.body;
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
+         const salt = genSaltSync(10);
+         body.password = hashSync(body.password, salt);
         updateUser(body, (err, results) => {
             if (err) {
                 console.log(err);
@@ -127,7 +127,7 @@ module.exports = {
     },
     login: (req, res) => {
         const body = req.body;
-        getUserByUserEmail(body.name, (err, results) => {
+        getUserByUserEmail(body.full_name, (err, results) => {
             if (err) {
                 console.log(err);
             }
