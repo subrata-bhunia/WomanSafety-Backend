@@ -36,20 +36,11 @@ module.exports = {
                 console.log(err);
                 return;
             }
-
-
-
-
             return res.json({
 
                 success: 1,
                 data: results
-
-
-
             });
-
-
         });
 
     },
@@ -87,14 +78,14 @@ module.exports = {
     },
     updateUsers: (req, res) => {
         const body = req.body;
-        // const salt = genSaltSync(10);
-        // body.password = hashSync(body.password, salt);
+        const salt = genSaltSync(10);
+        body.password = hashSync(body.password, salt);
         updateUser(body, (err, results) => {
             if (err) {
                 console.log(err);
                 return;
             }
-            if (!results) {
+            if (results===0) {
                 return res.json({
                     success: 0,
                     data: "failed to update user"
@@ -138,12 +129,12 @@ module.exports = {
                 });
             }
           
-           // const result = compare(body.password, results.password);
+        //    const result = compareSync(body.password, results.password);
             
             
                 if (results)
                 {
-                results.password = undefined;
+                // results.password = undefined;
                 const jsontoken = sign({ result: results }, "qwe1234", {
                     expiresIn: "1h"
                 });

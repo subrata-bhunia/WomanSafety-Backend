@@ -50,7 +50,7 @@ module.exports = {
       },
       getUserByUserId: (id, callBack) => {
         connection.query(
-          `select user_id,full_name,aadhar_card,phone,password from users where user_id = ?`,
+          `select * from users where user_id = ?`,
           [id],
           (error, results, fields) => {
             if (error) {
@@ -62,20 +62,21 @@ module.exports = {
       },
       updateUser: (data, callBack) => {
         connection.query(
-          `update users set full_name=?,aadhar_card=?,phone=?,password=? where user_id=?`,
+          `update users set full_name=?,aadhar_card=?,phone=?,password=?,photo=?,last_location=? where user_id=?`,
           [
-            data.id,
             data.name,
             data.aadhar_card,
             data.number,
-            data.password
-            
+            data.password,
+            data.photo,
+            data.last_location,
+            data.id
           ],
           (error, results, fields) => {
             if (error) {
               callBack(error);
             }
-            return callBack(null, results[0]);
+            return callBack(null, results.affectedRows);
           }
         );
       },
