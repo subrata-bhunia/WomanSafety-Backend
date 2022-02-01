@@ -2,7 +2,7 @@ const connection = require("../../config/Connection");
 
 
 // --------------------- //
-const createUser= 'INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `password`, `aadhar_card`,`photo`) VALUES (?,?,?,?,?,?,?)'
+const createUser= 'INSERT INTO `users` (`user_id`, `full_name`, `email`, `phone`, `password`, `aadhar_card`,`photo`,`verified`) VALUES (?,?,?,?,?,?,?,?)'
 module.exports = {
     create: (data, callBack) => {
       connection.query(createUser,
@@ -13,7 +13,8 @@ module.exports = {
           data.phone,
           data.password,
           data.aadhar_card,
-          data.photo
+          data.photo,
+          data.verified
         ],
         (error, results, fields) => {
           if (error) {
