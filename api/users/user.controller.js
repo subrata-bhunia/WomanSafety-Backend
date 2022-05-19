@@ -115,6 +115,8 @@ module.exports = {
     });
   },
   login: (req, res) => {
+    console.log("Test");
+    console.log(req);
     const body = req.body;
     getUserByUserEmail(body.email, (err, results) => {
       if (err) {
@@ -123,14 +125,10 @@ module.exports = {
       if (!results) {
         return res.json({
           success: 0,
-          data: "Invalid name or password",
+          data: "Invalid name or password 1",
         });
       }
-
-      //    const result = compareSync(body.password, results.password);
-      const salt = genSaltSync(10);
       if (results) {
-        // console.log(hashSync(body.password, salt));
         if (compareSync(body.password, results.password)) {
           console.log("passs");
           const jsontoken = sign({ result: results }, "qwe1234", {

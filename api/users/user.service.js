@@ -39,6 +39,7 @@ module.exports = {
     );
   },
   getUserByUserEmail: (email, callBack) => {
+    console.log(email);
     connection.query(
       `select * from users where email = ?`,
       [email],
