@@ -1,8 +1,9 @@
 const connection = require("../../config/Connection");
-
 const getallCirclesQ = `SELECT * FROM circles_name where user_id = ?`;
 const addCirclesQ = `INSERT INTO circles_name (id,user_id,name) VALUES (?,?,?);`;
 const deleteCirlesQ = `DELETE FROM circles_name WHERE circles_name.id = ?`;
+const updateCirclesCountQ = `UPDATE circles_name SET count = ? WHERE circles_name.id = ?; `;
+const getPreviousCountQ = `SELECT circles_name.count FROM circles_name WHERE circles_name.id = ?; `;
 
 module.exports = {
   getallCircles: (user_id, callBack) => {
@@ -34,5 +35,31 @@ module.exports = {
       }
       return callBack(null, results);
     });
+  },
+  getCount: (circle_id, callBack) => {
+    connection.query(
+      getPreviousCountQ,
+      [circle_id],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        } else {
+          return callBack(null, results[0]);
+        }
+      }
+    );
+  },
+  updateCounts: (data, callBack) => {
+    connection.query(
+      updateCirclesCountQ,
+      [data.count, data.circle_id],
+      (error, results, fields) => {
+        if (error) {
+          return callBack(error);
+        } else {
+          return callBack(null, results);
+        }
+      }
+    );
   },
 };

@@ -1,7 +1,11 @@
+const { deleteCirlesContact } = require("../sos_contact/sos_contact.service");
 const {
   getallCircles,
   addCircles,
   deleteCirles,
+  getCount,
+  updateCount,
+  updateCounts,
 } = require("./circles.service");
 
 module.exports = {
@@ -38,18 +42,55 @@ module.exports = {
     });
   },
   deleteCircle: (req, res) => {
-    const circle_id = req.params.circle_id;
-    deleteCirles(circle_id, (err, results) => {
+    const body = req.body;
+    deleteCirlesContact(body, (err, result) => {
       if (err) {
         return res.json({
           success: 0,
-          error: err,
+          error: err.sqlMessage,
+        });
+      } else {
+        deleteCirles(body.circle_id, (err, results) => {
+          if (err) {
+            return res.json({
+              success: 0,
+              error: err.sqlMessage,
+            });
+          }
+          return res.json({
+            success: 1,
+            data: "Circle delete successfully",
+          });
         });
       }
-      return res.json({
-        success: 1,
-        data: "Circle delete successfully",
-      });
+    });
+  },
+  updateCount: (req, res) => {
+    const circle_id = req.params.circle_id;
+    getCount(circle_id, (err, results) => {
+      if (err) {
+        return res.json({
+          success: 0,
+          data: "Something went to wrong",
+        });
+      } else {
+        var count = results.count;
+        console.log(typeof count);
+        updateCounts({ circle_id, count: count + 1 }, (error, response) => {
+          if (error) {
+            console.log(error);
+            return res.json({
+              success: 0,
+              data: "Something went to wrong",
+            });
+          } else {
+            return res.json({
+              success: 1,
+              data: "Count update",
+            });
+          }
+        });
+      }
     });
   },
 };
