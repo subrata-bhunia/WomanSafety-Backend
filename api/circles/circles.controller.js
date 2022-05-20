@@ -56,11 +56,12 @@ module.exports = {
               success: 0,
               error: err.sqlMessage,
             });
+          } else {
+            return res.json({
+              success: 1,
+              data: "Circle delete successfully",
+            });
           }
-          return res.json({
-            success: 1,
-            data: "Circle delete successfully",
-          });
         });
       }
     });
