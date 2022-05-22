@@ -1,10 +1,10 @@
-const { updateCount } = require("../circles/circles.controller");
 const { updateCounts, getCount } = require("../circles/circles.service");
 const { getAllContact, addContacts } = require("./sos_contact.service");
 
 module.exports = {
   getAllContact: (req, res) => {
     var body = req.body;
+    console.log(body.user_id);
     getAllContact(
       {
         user_id: body.user_id,

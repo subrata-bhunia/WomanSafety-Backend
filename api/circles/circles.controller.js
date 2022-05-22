@@ -43,6 +43,8 @@ module.exports = {
   },
   deleteCircle: (req, res) => {
     const body = req.body;
+    console.log(typeof body.user_id, body.user_id);
+    console.log(typeof body.circle_id, body.circle_id);
     deleteCirlesContact(body, (err, result) => {
       if (err) {
         return res.json({
