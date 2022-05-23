@@ -1,5 +1,5 @@
 const connection = require("../../config/Connection");
-const getAllContactQ = `SELECT * FROM sos_info where user_id = ? and circle = ?`;
+const getAllContactQ = `SELECT * FROM sos_info where user_id = ? and circle = ? ORDER BY createdAt`;
 const addContactsQ = `INSERT INTO sos_info (id,user_id,name,phone1,relation,circle) VALUES (?,?,?,?,?,?);`;
 const deleteCirlesContactQ = `DELETE FROM sos_info WHERE sos_info.user_id = ? and circle = ?`;
 const updateCirclesCountQ = `UPDATE circles_name SET count = ? WHERE circles_name.id = ?; `;
