@@ -1,5 +1,5 @@
 const connection = require("../../config/Connection");
-const getallCirclesQ = `SELECT * FROM circles_name where user_id = ? ORDER BY createdAt`;
+const getallCirclesQ = `SELECT * FROM circles_name where user_id = ? ORDER BY createdAt DESC`;
 const addCirclesQ = `INSERT INTO circles_name (id,user_id,name) VALUES (?,?,?);`;
 const deleteCirlesQ = `DELETE FROM circles_name WHERE circles_name.id = ?`;
 const updateCirclesCountQ = `UPDATE circles_name SET count = ? WHERE circles_name.id = ?; `;
