@@ -1,7 +1,28 @@
 const { updateCounts, getCount } = require("../circles/circles.service");
-const { getAllContact, addContacts } = require("./sos_contact.service");
+const { getAllContact, addContacts, getAll } = require("./sos_contact.service");
 
 module.exports = {
+  getAllCC: (req, res) => {
+    var body = req.body;
+    console.log(body.user_id);
+    getAll(
+      {
+        user_id: body.user_id,
+      },
+      (err, results) => {
+        if (err) {
+          return res.json({
+            success: 0,
+            error: err,
+          });
+        }
+        return res.json({
+          success: 1,
+          data: results,
+        });
+      }
+    );
+  },
   getAllContact: (req, res) => {
     var body = req.body;
     console.log(body.user_id);

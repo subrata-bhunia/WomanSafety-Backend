@@ -1,11 +1,20 @@
 const connection = require("../../config/Connection");
 const getAllContactQ = `SELECT * FROM sos_info where user_id = ? and circle = ? ORDER BY createdAt DESC`;
+const allContact = `SELECT * FROM sos_info where user_id = ?  ORDER BY createdAt DESC`;
 const addContactsQ = `INSERT INTO sos_info (id,user_id,name,phone1,relation,circle) VALUES (?,?,?,?,?,?);`;
 const deleteCirlesContactQ = `DELETE FROM sos_info WHERE sos_info.user_id = ? and circle = ?`;
 const updateCirclesCountQ = `UPDATE circles_name SET count = ? WHERE circles_name.id = ?; `;
 const getPreviousCountQ = `SELECT circles_name.count FROM circles_name WHERE circles_name.id = ?; `;
 
 module.exports = {
+  getAll: (data, callBack) => {
+    connection.query(allContact, [data.user_id], (error, results) => {
+      if (error) {
+        return callBack(error);
+      }
+      return callBack(null, results);
+    });
+  },
   getAllContact: (data, callBack) => {
     console.log(data);
     connection.query(
