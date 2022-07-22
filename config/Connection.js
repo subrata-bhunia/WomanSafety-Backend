@@ -11,10 +11,10 @@ const dbconfig = {
 var connection;
 
 connection = mysql.createConnection({
-  database: "u973746243_women_safety",
-  host: "109.106.254.101",
-  user: "u973746243_safety_root",
-  password: "Admin@123",
+  database: "CeTRC47Isc",
+  host: "https://remotemysql.com/",
+  user: "CeTRC47Isc",
+  password: "rLqHV7QV7M",
 });
 
 module.exports = connection;
