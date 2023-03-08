@@ -6,11 +6,14 @@ const userRouter = require("./api/users/user.router");
 const safetyRouter = require("./api/safety_tips/safety_tips.router");
 const circleRouter = require("./api/circles/circles.router");
 const sosRouter = require("./api/sos_contact/sos_contact.router");
+const connection = require("./config/Connection");
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 require("dotenv").config();
-
+const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
+const client = new Client();
+client.initialize();
 app.use("/api/users", userRouter);
 app.use("/api/safety-tips", safetyRouter);
 app.use("/api/circle", circleRouter);

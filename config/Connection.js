@@ -11,10 +11,20 @@ const dbconfig = {
 var connection;
 
 connection = mysql.createConnection({
-  database: "CeTRC47Isc",
-  host: "https://remotemysql.com/",
-  user: "CeTRC47Isc",
-  password: "rLqHV7QV7M",
+  port: 2222,
+  database: "subratat_mysql",
+  host: "192.168.0.100",
+  user: "subratat_php",
+  password: "Admin@123",
+  connectionLimit: 10,
+  acquireTimeout: 30000, //30 secs
+  ssl: false,
 });
-
+connection.connect(function (err) {
+  if (err) {
+    console.log("CONNECTION ERROR", JSON.stringify(err));
+  } else {
+    console.log("CONNECTED");
+  }
+});
 module.exports = connection;
