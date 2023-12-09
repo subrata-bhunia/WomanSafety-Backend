@@ -11,12 +11,12 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 require("dotenv").config();
-const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
-const client = new Client();
-client.on("loading_screen", (percent, message) => {
-  console.log("LOADING SCREEN", percent, message);
-});
-client.initialize();
+// const { Client, LocalAuth, MessageMedia } = require("whatsapp-web.js");
+// const client = new Client();
+// client.on("loading_screen", (percent, message) => {
+//   console.log("LOADING SCREEN", percent, message);
+// });
+// client.initialize();
 app.use("/api/users", userRouter);
 app.use("/api/safety-tips", safetyRouter);
 app.use("/api/circle", circleRouter);
